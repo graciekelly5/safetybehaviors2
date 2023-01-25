@@ -4,7 +4,7 @@ if (!require("pacman")) install.packages("pacman")
 
 #Use pacman to load packages I want##
 <<<<<<< HEAD
-pacman::p_load(pacman, rio, naniar, lme4, merTools, jtools, lmerTest, reghelper, gitcreds, dplyr, car, psych, psychTools)
+pacman::p_load(pacman, knitr, rmarkdown, rio, naniar, lme4, merTools, jtools, lmerTest, reghelper, gitcreds, dplyr, car, psych, psychTools)
 =======
 pacman::p_load(pacman, rio, naniar, lme4, merTools, jtools, lmerTest, reghelper, gitcreds, dplyr, car)
 >>>>>>> 1b6895dff287d6a1ab7597826a1e8180526032fa
