@@ -5442,3 +5442,482 @@ summary(PHData)
     ##  Mean   : -9.39   Mean   : -9.4   Mean   : -9.88   Mean   : -9.84  
     ##  3rd Qu.:  1.00   3rd Qu.:  2.0   3rd Qu.:  1.00   3rd Qu.:  1.00  
     ##  Max.   :  2.00   Max.   :  2.0   Max.   :  2.00   Max.   :  2.00
+
+``` r
+#change -99s to NAs
+PHData[PHData ==-99] <- NA
+```
+
+``` r
+###SCORING#####
+
+
+##creating scaled scores for T1 Safety behaviors##
+
+#means
+
+PHData$T1Safe_Mean <- rowMeans(PHData[,c("T1_SAFE_1", "T1_SAFE_2", "T1_SAFE_3", "T1_SAFE_4", "T1_SAFE_5", "T1_SAFE_6", "T1_SAFE_7", "T1_SAFE_8", "T1_SAFE_9", "T1_SAFE_10", "T1_SAFE_11", "T1_SAFE_12", "T1_SAFE_13", "T1_SAFE_14", "T1_SAFE_15", "T1_SAFE_16", "T1_SAFE_17", "T1_SAFE_18", "T1_SAFE_19", "T1_SAFE_20", "T1_SAFE_21", "T1_SAFE_22", "T1_SAFE_23", "T1_SAFE_24", "T1_SAFE_25", "T1_SAFE_26", "T1_SAFE_27", "T1_SAFE_28", "T1_SAFE_29", "T1_SAFE_30", "T1_SAFE_31", "T1_SAFE_32")], na.rm=TRUE)
+
+#totals
+PHData$T1Safe_Total <- rowSums(PHData[,c("T1_SAFE_1", "T1_SAFE_2", "T1_SAFE_3", "T1_SAFE_4", "T1_SAFE_5", "T1_SAFE_6", "T1_SAFE_7", "T1_SAFE_8", "T1_SAFE_9", "T1_SAFE_10", "T1_SAFE_11", "T1_SAFE_12", "T1_SAFE_13", "T1_SAFE_14", "T1_SAFE_15", "T1_SAFE_16", "T1_SAFE_17", "T1_SAFE_18", "T1_SAFE_19", "T1_SAFE_20", "T1_SAFE_21", "T1_SAFE_22", "T1_SAFE_23", "T1_SAFE_24", "T1_SAFE_25", "T1_SAFE_26", "T1_SAFE_27", "T1_SAFE_28", "T1_SAFE_29", "T1_SAFE_30", "T1_SAFE_31", "T1_SAFE_32")], na.rm=TRUE)
+
+
+##getting reliability etc info about T1 Safe##
+
+alpha(PHData[,c("T1_SAFE_1", "T1_SAFE_2", "T1_SAFE_3", "T1_SAFE_4", "T1_SAFE_5", "T1_SAFE_6", "T1_SAFE_7", "T1_SAFE_8", "T1_SAFE_9", "T1_SAFE_10", "T1_SAFE_11", "T1_SAFE_12", "T1_SAFE_13", "T1_SAFE_14", "T1_SAFE_15", "T1_SAFE_16", "T1_SAFE_17", "T1_SAFE_18", "T1_SAFE_19", "T1_SAFE_20", "T1_SAFE_21", "T1_SAFE_22", "T1_SAFE_23", "T1_SAFE_24", "T1_SAFE_25", "T1_SAFE_26", "T1_SAFE_27", "T1_SAFE_28", "T1_SAFE_29", "T1_SAFE_30", "T1_SAFE_31", "T1_SAFE_32")])
+```
+
+    ## 
+    ## Reliability analysis   
+    ## Call: alpha(x = PHData[, c("T1_SAFE_1", "T1_SAFE_2", "T1_SAFE_3", "T1_SAFE_4", 
+    ##     "T1_SAFE_5", "T1_SAFE_6", "T1_SAFE_7", "T1_SAFE_8", "T1_SAFE_9", 
+    ##     "T1_SAFE_10", "T1_SAFE_11", "T1_SAFE_12", "T1_SAFE_13", "T1_SAFE_14", 
+    ##     "T1_SAFE_15", "T1_SAFE_16", "T1_SAFE_17", "T1_SAFE_18", "T1_SAFE_19", 
+    ##     "T1_SAFE_20", "T1_SAFE_21", "T1_SAFE_22", "T1_SAFE_23", "T1_SAFE_24", 
+    ##     "T1_SAFE_25", "T1_SAFE_26", "T1_SAFE_27", "T1_SAFE_28", "T1_SAFE_29", 
+    ##     "T1_SAFE_30", "T1_SAFE_31", "T1_SAFE_32")])
+    ## 
+    ##   raw_alpha std.alpha G6(smc) average_r S/N    ase mean   sd median_r
+    ##       0.96      0.96    0.98      0.44  25 0.0038  1.9 0.72     0.45
+    ## 
+    ##  lower alpha upper     95% confidence boundaries
+    ## 0.95 0.96 0.97 
+    ## 
+    ##  Reliability if an item is dropped:
+    ##            raw_alpha std.alpha G6(smc) average_r S/N alpha se var.r med.r
+    ## T1_SAFE_1       0.96      0.96    0.97      0.44  25   0.0039 0.013  0.45
+    ## T1_SAFE_2       0.96      0.96    0.97      0.44  25   0.0039 0.012  0.45
+    ## T1_SAFE_3       0.96      0.96    0.97      0.44  24   0.0039 0.013  0.45
+    ## T1_SAFE_4       0.96      0.96    0.97      0.44  25   0.0039 0.012  0.45
+    ## T1_SAFE_5       0.96      0.96    0.98      0.44  25   0.0039 0.013  0.45
+    ## T1_SAFE_6       0.96      0.96    0.97      0.45  25   0.0039 0.013  0.45
+    ## T1_SAFE_7       0.96      0.96    0.98      0.45  25   0.0039 0.013  0.45
+    ## T1_SAFE_8       0.96      0.96    0.97      0.44  24   0.0040 0.013  0.45
+    ## T1_SAFE_9       0.96      0.96    0.97      0.45  25   0.0038 0.012  0.46
+    ## T1_SAFE_10      0.96      0.96    0.97      0.44  24   0.0039 0.013  0.45
+    ## T1_SAFE_11      0.96      0.96    0.97      0.45  25   0.0039 0.013  0.45
+    ## T1_SAFE_12      0.96      0.96    0.97      0.45  25   0.0038 0.012  0.45
+    ## T1_SAFE_13      0.96      0.96    0.98      0.44  25   0.0039 0.013  0.45
+    ## T1_SAFE_14      0.96      0.96    0.97      0.44  24   0.0040 0.013  0.44
+    ## T1_SAFE_15      0.96      0.96    0.97      0.44  25   0.0039 0.013  0.45
+    ## T1_SAFE_16      0.96      0.96    0.97      0.45  25   0.0038 0.013  0.45
+    ## T1_SAFE_17      0.96      0.96    0.97      0.44  24   0.0040 0.013  0.44
+    ## T1_SAFE_18      0.96      0.96    0.97      0.44  25   0.0039 0.013  0.45
+    ## T1_SAFE_19      0.96      0.96    0.97      0.44  24   0.0040 0.013  0.44
+    ## T1_SAFE_20      0.96      0.96    0.97      0.44  24   0.0040 0.013  0.44
+    ## T1_SAFE_21      0.96      0.96    0.97      0.44  24   0.0040 0.013  0.44
+    ## T1_SAFE_22      0.96      0.96    0.97      0.44  24   0.0040 0.013  0.44
+    ## T1_SAFE_23      0.96      0.96    0.97      0.44  24   0.0039 0.013  0.45
+    ## T1_SAFE_24      0.96      0.96    0.97      0.44  25   0.0039 0.013  0.45
+    ## T1_SAFE_25      0.96      0.96    0.97      0.44  24   0.0040 0.013  0.44
+    ## T1_SAFE_26      0.96      0.96    0.97      0.44  25   0.0039 0.013  0.45
+    ## T1_SAFE_27      0.96      0.96    0.97      0.44  24   0.0039 0.013  0.45
+    ## T1_SAFE_28      0.96      0.96    0.97      0.44  24   0.0040 0.013  0.44
+    ## T1_SAFE_29      0.96      0.96    0.97      0.44  24   0.0039 0.013  0.45
+    ## T1_SAFE_30      0.96      0.96    0.97      0.44  25   0.0039 0.013  0.45
+    ## T1_SAFE_31      0.96      0.96    0.97      0.44  24   0.0039 0.013  0.45
+    ## T1_SAFE_32      0.96      0.96    0.97      0.44  25   0.0039 0.012  0.45
+    ## 
+    ##  Item statistics 
+    ##              n raw.r std.r r.cor r.drop mean   sd
+    ## T1_SAFE_1  212  0.62  0.61  0.60   0.59  2.3 1.15
+    ## T1_SAFE_2  212  0.64  0.64  0.63   0.61  2.6 1.12
+    ## T1_SAFE_3  210  0.72  0.71  0.70   0.69  2.5 1.21
+    ## T1_SAFE_4  212  0.67  0.66  0.66   0.64  2.2 1.13
+    ## T1_SAFE_5  212  0.62  0.63  0.62   0.60  1.6 0.89
+    ## T1_SAFE_6  212  0.60  0.60  0.59   0.57  1.9 1.10
+    ## T1_SAFE_7  212  0.60  0.60  0.58   0.57  1.8 1.02
+    ## T1_SAFE_8  212  0.75  0.74  0.74   0.73  2.1 1.11
+    ## T1_SAFE_9  212  0.51  0.51  0.50   0.47  2.0 1.14
+    ## T1_SAFE_10 212  0.71  0.71  0.70   0.69  1.8 1.01
+    ## T1_SAFE_11 212  0.59  0.61  0.60   0.57  1.4 0.84
+    ## T1_SAFE_12 212  0.56  0.56  0.55   0.52  1.8 1.16
+    ## T1_SAFE_13 210  0.62  0.62  0.61   0.59  1.8 1.08
+    ## T1_SAFE_14 212  0.73  0.72  0.72   0.70  2.5 1.26
+    ## T1_SAFE_15 212  0.65  0.65  0.64   0.62  1.9 1.11
+    ## T1_SAFE_16 212  0.60  0.60  0.60   0.57  1.8 1.15
+    ## T1_SAFE_17 212  0.75  0.76  0.75   0.73  1.6 0.92
+    ## T1_SAFE_18 212  0.69  0.68  0.68   0.66  2.5 1.26
+    ## T1_SAFE_19 212  0.79  0.79  0.79   0.78  1.9 1.07
+    ## T1_SAFE_20 209  0.74  0.75  0.74   0.73  1.8 0.97
+    ## T1_SAFE_21 212  0.78  0.79  0.79   0.77  1.7 0.96
+    ## T1_SAFE_22 212  0.79  0.79  0.79   0.77  1.5 0.86
+    ## T1_SAFE_23 212  0.68  0.69  0.68   0.66  1.6 0.95
+    ## T1_SAFE_24 211  0.61  0.62  0.60   0.58  1.7 1.06
+    ## T1_SAFE_25 209  0.79  0.79  0.78   0.77  2.0 1.13
+    ## T1_SAFE_26 212  0.64  0.65  0.64   0.62  1.6 0.92
+    ## T1_SAFE_27 212  0.70  0.70  0.69   0.67  1.9 1.06
+    ## T1_SAFE_28 211  0.78  0.78  0.78   0.76  1.8 1.04
+    ## T1_SAFE_29 211  0.70  0.70  0.69   0.68  1.9 1.12
+    ## T1_SAFE_30 210  0.64  0.65  0.63   0.62  1.7 1.09
+    ## T1_SAFE_31 212  0.70  0.70  0.69   0.67  1.7 1.07
+    ## T1_SAFE_32 211  0.69  0.69  0.68   0.67  2.4 1.21
+    ## 
+    ## Non missing response frequency for each item
+    ##               1    2    3    4    5 miss
+    ## T1_SAFE_1  0.32 0.31 0.18 0.17 0.02 0.02
+    ## T1_SAFE_2  0.20 0.32 0.21 0.25 0.01 0.02
+    ## T1_SAFE_3  0.28 0.24 0.23 0.21 0.04 0.03
+    ## T1_SAFE_4  0.35 0.28 0.21 0.13 0.02 0.02
+    ## T1_SAFE_5  0.66 0.19 0.10 0.04 0.01 0.02
+    ## T1_SAFE_6  0.52 0.21 0.19 0.05 0.03 0.02
+    ## T1_SAFE_7  0.50 0.28 0.13 0.08 0.01 0.02
+    ## T1_SAFE_8  0.36 0.30 0.19 0.13 0.02 0.02
+    ## T1_SAFE_9  0.44 0.25 0.16 0.12 0.02 0.02
+    ## T1_SAFE_10 0.50 0.27 0.14 0.08 0.01 0.02
+    ## T1_SAFE_11 0.76 0.12 0.08 0.03 0.01 0.02
+    ## T1_SAFE_12 0.58 0.18 0.10 0.11 0.03 0.02
+    ## T1_SAFE_13 0.57 0.18 0.16 0.08 0.02 0.03
+    ## T1_SAFE_14 0.28 0.24 0.23 0.18 0.07 0.02
+    ## T1_SAFE_15 0.50 0.21 0.17 0.08 0.02 0.02
+    ## T1_SAFE_16 0.57 0.17 0.15 0.08 0.03 0.02
+    ## T1_SAFE_17 0.62 0.18 0.15 0.04 0.00 0.02
+    ## T1_SAFE_18 0.32 0.20 0.25 0.18 0.06 0.02
+    ## T1_SAFE_19 0.50 0.25 0.15 0.09 0.01 0.02
+    ## T1_SAFE_20 0.54 0.26 0.13 0.06 0.01 0.04
+    ## T1_SAFE_21 0.58 0.23 0.13 0.05 0.01 0.02
+    ## T1_SAFE_22 0.72 0.13 0.12 0.02 0.01 0.02
+    ## T1_SAFE_23 0.61 0.22 0.10 0.06 0.01 0.02
+    ## T1_SAFE_24 0.64 0.15 0.12 0.06 0.02 0.03
+    ## T1_SAFE_25 0.49 0.21 0.17 0.12 0.01 0.04
+    ## T1_SAFE_26 0.66 0.19 0.10 0.04 0.01 0.02
+    ## T1_SAFE_27 0.49 0.27 0.14 0.07 0.02 0.02
+    ## T1_SAFE_28 0.54 0.22 0.16 0.06 0.02 0.03
+    ## T1_SAFE_29 0.53 0.20 0.16 0.08 0.03 0.03
+    ## T1_SAFE_30 0.64 0.15 0.11 0.08 0.02 0.03
+    ## T1_SAFE_31 0.63 0.15 0.15 0.04 0.03 0.02
+    ## T1_SAFE_32 0.30 0.21 0.29 0.14 0.05 0.03
+
+``` r
+data(PHData)
+```
+
+    ## Warning in data(PHData): data set 'PHData' not found
+
+``` r
+my.keys <- list(T1Safe=c("T1_SAFE_1", "T1_SAFE_2", "T1_SAFE_3", "T1_SAFE_4", "T1_SAFE_5", "T1_SAFE_6", "T1_SAFE_7", "T1_SAFE_8", "T1_SAFE_9", "T1_SAFE_10", "T1_SAFE_11", "T1_SAFE_12", "T1_SAFE_13", "T1_SAFE_14", "T1_SAFE_15", "T1_SAFE_16", "T1_SAFE_17", "T1_SAFE_18", "T1_SAFE_19", "T1_SAFE_20", "T1_SAFE_21", "T1_SAFE_22", "T1_SAFE_23", "T1_SAFE_24", "T1_SAFE_25", "T1_SAFE_26", "T1_SAFE_27", "T1_SAFE_28", "T1_SAFE_29","T1_SAFE_30", "T1_SAFE_31", "T1_SAFE_32"))
+my.scales <- scoreItems(my.keys,PHData)
+my.scales
+```
+
+    ## Call: scoreItems(keys = my.keys, items = PHData)
+    ## 
+    ## (Unstandardized) Alpha:
+    ##       T1Safe
+    ## alpha   0.96
+    ## 
+    ## Standard errors of unstandardized Alpha:
+    ##       T1Safe
+    ## ASE   0.0068
+    ## 
+    ## Average item correlation:
+    ##           T1Safe
+    ## average.r   0.44
+    ## 
+    ## Median item correlation:
+    ## T1Safe 
+    ##   0.45 
+    ## 
+    ##  Guttman 6* reliability: 
+    ##          T1Safe
+    ## Lambda.6   0.98
+    ## 
+    ## Signal/Noise based upon av.r : 
+    ##              T1Safe
+    ## Signal/Noise     25
+    ## 
+    ## Scale intercorrelations corrected for attenuation 
+    ##  raw correlations below the diagonal, alpha on the diagonal 
+    ##  corrected correlations above the diagonal:
+    ##        T1Safe
+    ## T1Safe   0.96
+    ## 
+    ##  In order to see the item by scale loadings and frequency counts of the data
+    ##  print with the short option = FALSE
+
+``` r
+print(my.scales, short=FALSE)
+```
+
+    ## Call: scoreItems(keys = my.keys, items = PHData)
+    ## 
+    ## (Unstandardized) Alpha:
+    ##       T1Safe
+    ## alpha   0.96
+    ## 
+    ## Standard errors of unstandardized Alpha:
+    ##       T1Safe
+    ## ASE   0.0068
+    ## 
+    ## Average item correlation:
+    ##           T1Safe
+    ## average.r   0.44
+    ## 
+    ## Median item correlation:
+    ## T1Safe 
+    ##   0.45 
+    ## 
+    ##  Guttman 6* reliability: 
+    ##          T1Safe
+    ## Lambda.6   0.98
+    ## 
+    ## Signal/Noise based upon av.r : 
+    ##              T1Safe
+    ## Signal/Noise     25
+    ## 
+    ## Scale intercorrelations corrected for attenuation 
+    ##  raw correlations below the diagonal, alpha on the diagonal 
+    ##  corrected correlations above the diagonal:
+    ##        T1Safe
+    ## T1Safe   0.96
+    ## 
+    ## Item by scale correlations:
+    ##  corrected for item overlap and scale reliability
+    ##            T1Safe
+    ## T1_SAFE_1    0.61
+    ## T1_SAFE_2    0.64
+    ## T1_SAFE_3    0.71
+    ## T1_SAFE_4    0.66
+    ## T1_SAFE_5    0.62
+    ## T1_SAFE_6    0.59
+    ## T1_SAFE_7    0.59
+    ## T1_SAFE_8    0.74
+    ## T1_SAFE_9    0.49
+    ## T1_SAFE_10   0.70
+    ## T1_SAFE_11   0.59
+    ## T1_SAFE_12   0.55
+    ## T1_SAFE_13   0.61
+    ## T1_SAFE_14   0.73
+    ## T1_SAFE_15   0.64
+    ## T1_SAFE_16   0.60
+    ## T1_SAFE_17   0.75
+    ## T1_SAFE_18   0.68
+    ## T1_SAFE_19   0.79
+    ## T1_SAFE_20   0.74
+    ## T1_SAFE_21   0.79
+    ## T1_SAFE_22   0.79
+    ## T1_SAFE_23   0.68
+    ## T1_SAFE_24   0.60
+    ## T1_SAFE_25   0.77
+    ## T1_SAFE_26   0.64
+    ## T1_SAFE_27   0.68
+    ## T1_SAFE_28   0.78
+    ## T1_SAFE_29   0.69
+    ## T1_SAFE_30   0.63
+    ## T1_SAFE_31   0.69
+    ## T1_SAFE_32   0.69
+    ## 
+    ## Non missing response frequency for each item
+    ##               1    2    3    4    5 miss
+    ## T1_SAFE_1  0.32 0.31 0.18 0.17 0.02 0.02
+    ## T1_SAFE_2  0.20 0.32 0.21 0.25 0.01 0.02
+    ## T1_SAFE_3  0.28 0.24 0.23 0.21 0.04 0.03
+    ## T1_SAFE_4  0.35 0.28 0.21 0.13 0.02 0.02
+    ## T1_SAFE_5  0.66 0.19 0.10 0.04 0.01 0.02
+    ## T1_SAFE_6  0.52 0.21 0.19 0.05 0.03 0.02
+    ## T1_SAFE_7  0.50 0.28 0.13 0.08 0.01 0.02
+    ## T1_SAFE_8  0.36 0.30 0.19 0.13 0.02 0.02
+    ## T1_SAFE_9  0.44 0.25 0.16 0.12 0.02 0.02
+    ## T1_SAFE_10 0.50 0.27 0.14 0.08 0.01 0.02
+    ## T1_SAFE_11 0.76 0.12 0.08 0.03 0.01 0.02
+    ## T1_SAFE_12 0.58 0.18 0.10 0.11 0.03 0.02
+    ## T1_SAFE_13 0.57 0.18 0.16 0.08 0.02 0.03
+    ## T1_SAFE_14 0.28 0.24 0.23 0.18 0.07 0.02
+    ## T1_SAFE_15 0.50 0.21 0.17 0.08 0.02 0.02
+    ## T1_SAFE_16 0.57 0.17 0.15 0.08 0.03 0.02
+    ## T1_SAFE_17 0.62 0.18 0.15 0.04 0.00 0.02
+    ## T1_SAFE_18 0.32 0.20 0.25 0.18 0.06 0.02
+    ## T1_SAFE_19 0.50 0.25 0.15 0.09 0.01 0.02
+    ## T1_SAFE_20 0.54 0.26 0.13 0.06 0.01 0.04
+    ## T1_SAFE_21 0.58 0.23 0.13 0.05 0.01 0.02
+    ## T1_SAFE_22 0.72 0.13 0.12 0.02 0.01 0.02
+    ## T1_SAFE_23 0.61 0.22 0.10 0.06 0.01 0.02
+    ## T1_SAFE_24 0.64 0.15 0.12 0.06 0.02 0.03
+    ## T1_SAFE_25 0.49 0.21 0.17 0.12 0.01 0.04
+    ## T1_SAFE_26 0.66 0.19 0.10 0.04 0.01 0.02
+    ## T1_SAFE_27 0.49 0.27 0.14 0.07 0.02 0.02
+    ## T1_SAFE_28 0.54 0.22 0.16 0.06 0.02 0.03
+    ## T1_SAFE_29 0.53 0.20 0.16 0.08 0.03 0.03
+    ## T1_SAFE_30 0.64 0.15 0.11 0.08 0.02 0.03
+    ## T1_SAFE_31 0.63 0.15 0.15 0.04 0.03 0.02
+    ## T1_SAFE_32 0.30 0.21 0.29 0.14 0.05 0.03
+
+``` r
+#scoring for T1
+T1bdi<- PHData %>% select(contains("T1_BDI"))
+T1bdi <- T1bdi %>% mutate(T1bdi=rowSums(select(., c("T1_BDI_1", "T1_BDI_2", "T1_BDI_3","T1_BDI_4","T1_BDI_5", "T1_BDI_6", "T1_BDI_7", "T1_BDI_8", "T1_BDI_9", "T1_BDI_10", "T1_BDI_11", "T1_BDI_12", "T1_BDI_13", "T1_BDI_14", "T1_BDI_15","T1_BDI_16", "T1_BDI_17", "T1_BDI_18", "T1_BDI_19", "T1_BDI_20"))))
+head(T1bdi)
+```
+
+    ##   T1_BDI_1 T1_BDI_2 T1_BDI_3 T1_BDI_4 T1_BDI_5 T1_BDI_6 T1_BDI_7 T1_BDI_8
+    ## 1        1        1        1        1        1        1        1        1
+    ## 2        1        2        2        1        1        1        2        1
+    ## 3        1        2        3        1        1        2        1        1
+    ## 4        1        1        1        1        1        1        2        1
+    ## 5        1        1        1        1        1        1        1        1
+    ## 6        2        2        1        1        1        1        1        2
+    ##   T1_BDI_9 T1_BDI_10 T1_BDI_11 T1_BDI_12 T1_BDI_13 T1_BDI_14 T1_BDI_15
+    ## 1        1         1         1         1         1         1         1
+    ## 2        1         3         2         1         1         2         5
+    ## 3        1         1         1         1         1         1         3
+    ## 4        2         1         1         1         1         1         3
+    ## 5        1         1         2         1         1         1         3
+    ## 6        2         2         1         1         1         1         3
+    ##   T1_BDI_16 T1_BDI_17 T1_BDI_18 T1_BDI_19 T1_BDI_20 T1bdi
+    ## 1         1         1         1         1         1    20
+    ## 2         1         2         2         2         1    34
+    ## 3         1         2         1         2         2    29
+    ## 4         1         2         1         1         1    25
+    ## 5         2         1         1         1         1    24
+    ## 6         1         1         2         2         2    30
+
+``` r
+T1bdi_scoring <- T1bdi %>% dplyr::select(1:20)
+key_T1bdi.list<- list(Total=c(1:20))
+key_T1bdi<-make.keys(20,key_T1bdi.list,colnames(T1bdi_scoring))
+scales_T1bdi<- scoreItems(key_T1bdi.list, T1bdi_scoring)
+summary(scales_T1bdi)
+```
+
+    ## Call: scoreItems(keys = key_T1bdi.list, items = T1bdi_scoring)
+    ## 
+    ## Scale intercorrelations corrected for attenuation 
+    ##  raw correlations below the diagonal, (unstandardized) alpha on the diagonal 
+    ##  corrected correlations above the diagonal:
+    ##       Total
+    ## Total  0.89
+
+``` r
+#scoring for T2
+T2bdi<- PHData %>% select(contains("T2_BDI"))
+T2bdi <- T2bdi %>% mutate(T2bdi=rowSums(select(., c("T2_BDI_1", "T2_BDI_2", "T2_BDI_3","T2_BDI_4","T2_BDI_5", "T2_BDI_6", "T2_BDI_7", "T2_BDI_8", "T2_BDI_9", "T2_BDI_10", "T2_BDI_11", "T2_BDI_12", "T2_BDI_13", "T2_BDI_14", "T2_BDI_15","T2_BDI_16", "T2_BDI_17", "T2_BDI_18", "T2_BDI_19", "T2_BDI_20"))))
+head(T2bdi)
+```
+
+    ##   T2_BDI_1 T2_BDI_2 T2_BDI_3 T2_BDI_4 T2_BDI_5 T2_BDI_6 T2_BDI_7 T2_BDI_8
+    ## 1        1        1        1        1        1        1        1        1
+    ## 2        1        2        2        1        2        1        2        2
+    ## 3        1        2        3        1        2        2        1        1
+    ## 4        1        1        1        2        1        1        2        1
+    ## 5        1        1        1        1        1        1        1        1
+    ## 6        2        1        1        1        1        1        1        2
+    ##   T2_BDI_9 T2_BDI_10 T2_BDI_11 T2_BDI_12 T2_BDI_13 T2_BDI_14 T2_BDI_15
+    ## 1        1         1         1         2         1         1         2
+    ## 2        1         2         1         2         1         2         3
+    ## 3        1         2         2         1         2         2         3
+    ## 4        1         1         1         2         1         1         3
+    ## 5        1         2         1         1         1         1         3
+    ## 6        2         1         1         1         1         1         3
+    ##   T2_BDI_16 T2_BDI_17 T2_BDI_18 T2_BDI_19 T2_BDI_20 T2bdi
+    ## 1         1         2         1         1         1    23
+    ## 2         1         1         1         2         1    31
+    ## 3         2         1         1         2         2    34
+    ## 4         1         1         1         1         1    25
+    ## 5         1         1         1         2         1    24
+    ## 6         2         1         1         1         1    26
+
+``` r
+T2bdi_scoring <- T2bdi %>% dplyr::select(1:20)
+key_T2bdi.list<- list(Total=c(1:20))
+key_T2bdi<-make.keys(20,key_T2bdi.list,colnames(T2bdi_scoring))
+scales_T2bdi<- scoreItems(key_T2bdi.list, T2bdi_scoring)
+summary(scales_T2bdi)
+```
+
+    ## Call: scoreItems(keys = key_T2bdi.list, items = T2bdi_scoring)
+    ## 
+    ## Scale intercorrelations corrected for attenuation 
+    ##  raw correlations below the diagonal, (unstandardized) alpha on the diagonal 
+    ##  corrected correlations above the diagonal:
+    ##       Total
+    ## Total  0.92
+
+``` r
+#scoring for T3
+T3bdi<- PHData %>% select(contains("T3_BDI"))
+T3bdi <- T3bdi %>% mutate(T3bdi=rowSums(select(., c("T3_BDI_1", "T3_BDI_2", "T3_BDI_3","T3_BDI_4","T3_BDI_5", "T3_BDI_6", "T3_BDI_7", "T3_BDI_8", "T3_BDI_9", "T3_BDI_10", "T3_BDI_11", "T3_BDI_12", "T3_BDI_13", "T3_BDI_14", "T3_BDI_15","T3_BDI_16", "T3_BDI_17", "T3_BDI_18", "T3_BDI_19", "T3_BDI_20"))))
+head(T3bdi)
+```
+
+    ##   T3_BDI_1 T3_BDI_2 T3_BDI_3 T3_BDI_4 T3_BDI_5 T3_BDI_6 T3_BDI_7 T3_BDI_8
+    ## 1        1        1        1        1        1        1        1        1
+    ## 2        1        1        2        1        2        1        2        1
+    ## 3        1        1        1        1        1        2        3        1
+    ## 4        1        1        1        1        1        1        2        1
+    ## 5        1        1        1        1        1        1        1        1
+    ## 6        2        1        1        1        1        1        1        1
+    ##   T3_BDI_9 T3_BDI_10 T3_BDI_11 T3_BDI_12 T3_BDI_13 T3_BDI_14 T3_BDI_15
+    ## 1        1         1         1         2         1         2         1
+    ## 2        1         2         2         1         1         2         1
+    ## 3        1         1         2         2         1         2         3
+    ## 4        1         1         1         1         1         1         3
+    ## 5        1         2         2         2         1         1         1
+    ## 6        2         2         1         1         1         1         1
+    ##   T3_BDI_16 T3_BDI_17 T3_BDI_18 T3_BDI_19 T3_BDI_20 T3bdi
+    ## 1         1         1         1         1         1    22
+    ## 2         1         3         2         1         1    29
+    ## 3         2         3         2         2         2    34
+    ## 4         1         3         1         1         1    25
+    ## 5         1         1         1         2         1    24
+    ## 6         2         1         1         1         2    25
+
+``` r
+T3bdi_scoring <- T3bdi %>% dplyr::select(1:20)
+key_T3bdi.list<- list(Total=c(1:20))
+key_T3bdi<-make.keys(20,key_T3bdi.list,colnames(T3bdi_scoring))
+scales_T3bdi<- scoreItems(key_T3bdi.list, T3bdi_scoring)
+summary(scales_T3bdi)
+```
+
+    ## Call: scoreItems(keys = key_T3bdi.list, items = T3bdi_scoring)
+    ## 
+    ## Scale intercorrelations corrected for attenuation 
+    ##  raw correlations below the diagonal, (unstandardized) alpha on the diagonal 
+    ##  corrected correlations above the diagonal:
+    ##       Total
+    ## Total  0.93
+
+``` r
+#scoring for T4
+T4bdi<- PHData %>% select(contains("T4_BDI"))
+T4bdi <- T4bdi %>% mutate(T4bdi=rowSums(select(., c("T4_BDI_1", "T4_BDI_2", "T4_BDI_3","T4_BDI_4","T4_BDI_5", "T4_BDI_6", "T4_BDI_7", "T4_BDI_8", "T4_BDI_9", "T4_BDI_10", "T4_BDI_11", "T4_BDI_12", "T4_BDI_13", "T4_BDI_14", "T4_BDI_15","T4_BDI_16", "T4_BDI_17", "T4_BDI_18", "T4_BDI_19", "T4_BDI_20"))))
+head(T4bdi)
+```
+
+    ##   T4_BDI_1 T4_BDI_2 T4_BDI_3 T4_BDI_4 T4_BDI_5 T4_BDI_6 T4_BDI_7 T4_BDI_8
+    ## 1        1        1        1        1        1        1        1        1
+    ## 2        1        2        1        1        2        1        2        2
+    ## 3        1        1        2        2        1        2        1        1
+    ## 4        1        1        1        1        1        1        1        1
+    ## 5        1        1        1        1        1        1        1        1
+    ## 6        1        1        1        1        1        1        1        1
+    ##   T4_BDI_9 T4_BDI_10 T4_BDI_11 T4_BDI_12 T4_BDI_13 T4_BDI_14 T4_BDI_15
+    ## 1        1         1         1         1         1         1         1
+    ## 2        1         2         1         2         1         2         3
+    ## 3        1         2         1         1         1         1         1
+    ## 4        1         1         1         1         1         1         3
+    ## 5        1         1         2         1         1         1         1
+    ## 6        1         1         1         1         1         1         1
+    ##   T4_BDI_16 T4_BDI_17 T4_BDI_18 T4_BDI_19 T4_BDI_20 T4bdi
+    ## 1         1         1         1         1         1    20
+    ## 2         1         3         2         2         1    33
+    ## 3         2         1         1         2         1    26
+    ## 4         1         2         1         1         1    23
+    ## 5         1         1         1         1         1    21
+    ## 6         2         1         1         2         1    22
+
+``` r
+T4bdi_scoring <- T4bdi %>% dplyr::select(1:20)
+key_T4bdi.list<- list(Total=c(1:20))
+key_T4bdi<-make.keys(20,key_T4bdi.list,colnames(T4bdi_scoring))
+scales_T4bdi<- scoreItems(key_T4bdi.list, T4bdi_scoring)
+summary(scales_T4bdi)
+```
+
+    ## Call: scoreItems(keys = key_T4bdi.list, items = T4bdi_scoring)
+    ## 
+    ## Scale intercorrelations corrected for attenuation 
+    ##  raw correlations below the diagonal, (unstandardized) alpha on the diagonal 
+    ##  corrected correlations above the diagonal:
+    ##       Total
+    ## Total  0.93
