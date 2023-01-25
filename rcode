@@ -1,1 +1,44 @@
+#documenting code here
+# install and load packages ###
+if (!require("pacman")) install.packages("pacman")
+
+#Use pacman to load packages I want##
+<<<<<<< HEAD
+pacman::p_load(pacman, rio, naniar, lme4, merTools, jtools, lmerTest, reghelper, gitcreds, dplyr, car, psych, psychTools)
+=======
+pacman::p_load(pacman, rio, naniar, lme4, merTools, jtools, lmerTest, reghelper, gitcreds, dplyr, car)
+>>>>>>> 1b6895dff287d6a1ab7597826a1e8180526032fa
+
+#importing data
+PHData <-import("C:/Users/Owner/Downloads/Personality and Health MERGED  (1).xlsx")
+options(digits=6)
+head(PHData)
+summary(PHData)
+
+#change -99s to NAs
+PHData[PHData ==-99] <- NA
+
+###SCORING#####
+<<<<<<< HEAD
+
+##creating scaled scores for T1 Safety behaviors##
+
+#means
+
+PHData$T1Safe_Mean <- rowMeans(PHData[,c("T1_SAFE_1", "T1_SAFE_2", "T1_SAFE_3", "T1_SAFE_4", "T1_SAFE_5", "T1_SAFE_6", "T1_SAFE_7", "T1_SAFE_8", "T1_SAFE_9", "T1_SAFE_10", "T1_SAFE_11", "T1_SAFE_12", "T1_SAFE_13", "T1_SAFE_14", "T1_SAFE_15", "T1_SAFE_16", "T1_SAFE_17", "T1_SAFE_18", "T1_SAFE_19", "T1_SAFE_20", "T1_SAFE_21", "T1_SAFE_22", "T1_SAFE_23", "T1_SAFE_24", "T1_SAFE_25", "T1_SAFE_26", "T1_SAFE_27", "T1_SAFE_28", "T1_SAFE_29", "T1_SAFE_30", "T1_SAFE_31", "T1_SAFE_32")], na.rm=TRUE)
+
+#totals
+PHData$T1Safe_Total <- rowSums(PHData[,c("T1_SAFE_1", "T1_SAFE_2", "T1_SAFE_3", "T1_SAFE_4", "T1_SAFE_5", "T1_SAFE_6", "T1_SAFE_7", "T1_SAFE_8", "T1_SAFE_9", "T1_SAFE_10", "T1_SAFE_11", "T1_SAFE_12", "T1_SAFE_13", "T1_SAFE_14", "T1_SAFE_15", "T1_SAFE_16", "T1_SAFE_17", "T1_SAFE_18", "T1_SAFE_19", "T1_SAFE_20", "T1_SAFE_21", "T1_SAFE_22", "T1_SAFE_23", "T1_SAFE_24", "T1_SAFE_25", "T1_SAFE_26", "T1_SAFE_27", "T1_SAFE_28", "T1_SAFE_29", "T1_SAFE_30", "T1_SAFE_31", "T1_SAFE_32")], na.rm=TRUE)
+
+
+##getting reliability etc info about T1 Safe##
+
+alpha(PHData[,c("T1_SAFE_1", "T1_SAFE_2", "T1_SAFE_3", "T1_SAFE_4", "T1_SAFE_5", "T1_SAFE_6", "T1_SAFE_7", "T1_SAFE_8", "T1_SAFE_9", "T1_SAFE_10", "T1_SAFE_11", "T1_SAFE_12", "T1_SAFE_13", "T1_SAFE_14", "T1_SAFE_15", "T1_SAFE_16", "T1_SAFE_17", "T1_SAFE_18", "T1_SAFE_19", "T1_SAFE_20", "T1_SAFE_21", "T1_SAFE_22", "T1_SAFE_23", "T1_SAFE_24", "T1_SAFE_25", "T1_SAFE_26", "T1_SAFE_27", "T1_SAFE_28", "T1_SAFE_29", "T1_SAFE_30", "T1_SAFE_31", "T1_SAFE_32")])
+
+
+data(PHData)
+my.keys <- list(T1Safe=c("T1_SAFE_1", "T1_SAFE_2", "T1_SAFE_3", "T1_SAFE_4", "T1_SAFE_5", "T1_SAFE_6", "T1_SAFE_7", "T1_SAFE_8", "T1_SAFE_9", "T1_SAFE_10", "T1_SAFE_11", "T1_SAFE_12", "T1_SAFE_13", "T1_SAFE_14", "T1_SAFE_15", "T1_SAFE_16", "T1_SAFE_17", "T1_SAFE_18", "T1_SAFE_19", "T1_SAFE_20", "T1_SAFE_21", "T1_SAFE_22", "T1_SAFE_23", "T1_SAFE_24", "T1_SAFE_25", "T1_SAFE_26", "T1_SAFE_27", "T1_SAFE_28", "T1_SAFE_29","T1_SAFE_30", "T1_SAFE_31", "T1_SAFE_32"))
+my.scales <- scoreItems(my.keys,PHData)
+my.scales
+print(my.scales, short=FALSE)
 
